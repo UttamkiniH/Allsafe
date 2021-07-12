@@ -9,5 +9,6 @@ const  headlineMain = TextStyle(
 
 const primaryColor = Color.fromRGBO(56, 57, 128, 1);
 const secondaryColor = Colors.white;
+const unselectedColor = Color.fromRGBO(210, 211, 237, 1);
 const cardColor = Color.fromRGBO(50, 51, 128, 1);
 const accentColor = Color.fromRGBO(44, 46, 135, 1);
