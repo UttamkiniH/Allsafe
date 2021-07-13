@@ -1,3 +1,4 @@
+import 'package:allsafe/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../constants.dart';
@@ -9,9 +10,9 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
-    Scaffold(),
-    Scaffold(),
-    Scaffold(),
+    HomeScreen(),
+    BedScreen(),
+    VaccineScreen(),
   ];
   int _currentIndex = 0;
   @override

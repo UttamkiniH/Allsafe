@@ -1,10 +1,18 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 
 const  headlineMain = TextStyle(
-  color: primaryColor,
+  color: Colors.white,
   fontFamily: 'Public Sans',
-  fontSize: 30,
+  fontSize: 34,
+);
+
+const gridFont = TextStyle(
+  fontFamily : 'Public Sans',
+  fontSize: 18,
+  fontWeight: FontWeight.w600
 );
 
 const primaryColor = Color.fromRGBO(56, 57, 128, 1);

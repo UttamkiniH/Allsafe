@@ -10,8 +10,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme(),
-        home: SafeArea(
-          child: BottomNavScreen(),
-        ));
+        home: BottomNavScreen());
   }
 }

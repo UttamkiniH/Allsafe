@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 ThemeData appTheme() {
   TextTheme _appTextTheme(TextTheme base) {
     return base.copyWith(
       headline5: base.headline5.copyWith(
         fontFamily: 'Public Sans',
-        // color: primaryColor,
+       color: primaryColor,
         fontSize: 30,
       ),
     );
