@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:allsafe/constants.dart';
 import 'package:allsafe/widgets/widgets.dart';
 import 'package:flutter/material.dart';

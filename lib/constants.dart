@@ -11,9 +11,14 @@ const  headlineMain = TextStyle(
 
 const gridFont = TextStyle(
   fontFamily : 'Public Sans',
-  fontSize: 18,
-  fontWeight: FontWeight.w600
+  fontSize: 36,
+  color: Colors.white,
 );
+
+const hiStyle = TextStyle(
+                    fontFamily: 'Public Sans',
+                    fontSize: 20,
+                    color: accentColor);
 
 const primaryColor = Color.fromRGBO(56, 57, 128, 1);
 const secondaryColor = Colors.white;
