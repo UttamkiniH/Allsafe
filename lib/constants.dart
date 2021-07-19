@@ -2,23 +2,27 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-
-const  headlineMain = TextStyle(
+const headlineMain = TextStyle(
   color: Colors.white,
   fontFamily: 'Public Sans',
   fontSize: 34,
 );
 
 const gridFont = TextStyle(
-  fontFamily : 'Public Sans',
+  fontFamily: 'Public Sans',
   fontSize: 36,
   color: Colors.white,
 );
 
-const hiStyle = TextStyle(
-                    fontFamily: 'Public Sans',
-                    fontSize: 20,
-                    color: accentColor);
+final slotFontNormal = TextStyle(
+  fontFamily: 'Public Sans Normal',
+  fontSize: 15,
+);
+final slotFontItalic = TextStyle(
+    fontFamily: 'Public Sans', fontSize: 15, fontStyle: FontStyle.italic);
+
+const hiStyle =
+    TextStyle(fontFamily: 'Public Sans', fontSize: 20, color: accentColor);
 
 const primaryColor = Color.fromRGBO(56, 57, 128, 1);
 const secondaryColor = Colors.white;
