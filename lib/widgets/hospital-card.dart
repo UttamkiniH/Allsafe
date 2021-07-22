@@ -1,18 +1,15 @@
 import 'package:allsafe/constants.dart';
+import 'package:allsafe/models/hospital-details.dart';
 import 'package:allsafe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class HospitalCard extends StatelessWidget {
-  final List hospitals = [
-    'Akash Hospital',
-    // 'address:Ramamurthy Nagar, Bengaluru, Karnataka'},
-    'Aster RV Hospital',
-    // 'address:Ramamurthy Nagar, Bengaluru, Karnataka'
-    'Rajshekar Multi Speciality Hospital Pvt Ltd',
-    // 'address:Ramamurthy Nagar, Bengaluru, Karnataka'
-    'Narayana Hrudayalaya Private Limited',
-    // 'address:Ramamurthy Nagar, Bengaluru, Karnataka',
-  ];
+class HospitalCard extends StatefulWidget {
+  @override
+  _HospitalCardState createState() => _HospitalCardState();
+}
+
+class _HospitalCardState extends State<HospitalCard> {
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,10 +49,10 @@ class HospitalCard extends StatelessWidget {
     );
   }
 
-  ListView _hospitalCard() {
-    return ListView.builder(
+   Widget _hospitalCard() {
+    return (HospitalModel.hospitals!=null && HospitalModel.hospitals.isNotEmpty)?ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: hospitals.length,
+        itemCount: HospitalModel.hospitals.take(5).length,
         itemBuilder: (context, index) {
           return Container(
             height: MediaQuery.of(context).size.height * 0.4,
@@ -65,8 +62,12 @@ class HospitalCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 color: Color(0xFF323380),
-                child: HospitalCardDetails(hospitals[index])),
+                child: HospitalCardDetails(hospital:HospitalModel.hospitals[index])),
           );
-        });
+        }):Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(accentColor),
+                  )
+                  );
   }
 }

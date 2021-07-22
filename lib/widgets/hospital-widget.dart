@@ -15,7 +15,6 @@ class HospitalWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(2),
       child: Card(
-      
         shape: RoundedRectangleBorder(
           side: BorderSide(color: primaryColor, width: 2),
           borderRadius: BorderRadius.circular(10),
@@ -42,21 +41,20 @@ class HospitalWidget extends StatelessWidget {
                   color: accentColor,
                 ),
                 SizedBox(width: 10),
-                Text(
-                  hospital.hospital_phone,
-                  style: TextStyle(
-                      fontFamily: 'Public Sans Normal',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15),
-                ),
+                if (hospital.hospital_phone != null)
+                  Text(
+                    hospital.hospital_phone,
+                    style: TextStyle(
+                        fontFamily: 'Public Sans Normal',
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                        fontSize: 15),
+                  ),
               ],
             ),
           ),
           trailing: Text('${hospital.available_beds_without_oxygen}',
-              style: TextStyle(
-                  fontFamily: 'Public Sans Normal',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 30)),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25)),
         ),
       ),
     );

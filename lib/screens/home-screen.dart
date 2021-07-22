@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:allsafe/constants.dart';
+import 'package:allsafe/models/hospital-details.dart';
 import 'package:allsafe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,6 +13,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    await Future.delayed(Duration(seconds: 2));
+    var hospitalJson =
+        await rootBundle.loadString("assets/data/bedCondition.json");
+    var decodedJson = jsonDecode(hospitalJson);
+    HospitalModel.hospitals = List.from(decodedJson)
+        .map<Hospital>((hospital) => Hospital.fromMap(hospital))
+        .toList();
+        if (this.mounted) {
+  setState(() {
+    
+  });
+}
+  }
+  
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

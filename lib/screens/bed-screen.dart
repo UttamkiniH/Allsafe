@@ -2,6 +2,8 @@ import 'package:allsafe/constants.dart';
 import 'package:allsafe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:allsafe/models/hospital-details.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 class BedScreen extends StatefulWidget {
   @override
@@ -10,8 +12,29 @@ class BedScreen extends StatefulWidget {
 
 class _BedScreenState extends State<BedScreen> {
   @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    await Future.delayed(Duration(seconds: 2));
+    var hospitalJson =
+        await rootBundle.loadString("assets/data/bedCondition.json");
+    var decodedJson = jsonDecode(hospitalJson);
+    HospitalModel.hospitals = List.from(decodedJson)
+        .map<Hospital>((hospital) => Hospital.fromMap(hospital))
+        .toList();
+        if (this.mounted) {
+  setState(() {
+    
+  });
+}
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(50, (index) => HospitalModel.hospitals[0]);
+    
     return Scaffold(
         appBar: AppBar(
           primary: true,
@@ -41,13 +64,15 @@ class _BedScreenState extends State<BedScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  itemCount: dummyList.length,
+                child: (HospitalModel.hospitals!=null && HospitalModel.hospitals.isNotEmpty)? ListView.builder(
+                  itemCount: HospitalModel.hospitals.length,
                   itemBuilder: (context, index) {
                     return HospitalWidget(
-                      hospital: dummyList[index],
+                      hospital: HospitalModel.hospitals[index],
                     );
                   },
+                ): Center(
+                  child: CircularProgressIndicator(),
                 ),
               ),
             ),
@@ -66,4 +91,3 @@ class _BedScreenState extends State<BedScreen> {
     );
   }
 }
-

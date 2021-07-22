@@ -1,10 +1,18 @@
+import 'package:allsafe/models/hospital-details.dart';
 import 'package:flutter/material.dart';
 
-class HospitalCardDetails extends StatelessWidget {
-  final String title1;
+class HospitalCardDetails extends StatefulWidget {
+  final Hospital hospital;
 
-  HospitalCardDetails(this.title1);
+  const HospitalCardDetails({Key key, @required this.hospital})
+      : assert(hospital != null),
+        super(key: key);
 
+  @override
+  _HospitalCardDetailsState createState() => _HospitalCardDetailsState();
+}
+
+class _HospitalCardDetailsState extends State<HospitalCardDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +22,7 @@ class HospitalCardDetails extends StatelessWidget {
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.all(12.0),
           child: Text(
-            title1,
+            widget.hospital.hospital_name,
             style: TextStyle(
                 fontFamily: 'Public Sans', color: Colors.white, fontSize: 24),
           ),
@@ -25,7 +33,7 @@ class HospitalCardDetails extends StatelessWidget {
             children: [
               Container(
                   child: Text(
-                '628',
+                '${widget.hospital.available_beds_without_oxygen}',
                 style: TextStyle(
                     fontFamily: 'Public Sans',
                     color: Colors.white,
@@ -34,7 +42,7 @@ class HospitalCardDetails extends StatelessWidget {
               SizedBox(width: 5),
               Container(
                   child: Text(
-                '88',
+                '${widget.hospital.available_beds_with_oxygen}',
                 style: TextStyle(
                     fontFamily: 'Public Sans',
                     color: Colors.white,

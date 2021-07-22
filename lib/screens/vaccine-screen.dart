@@ -154,7 +154,7 @@ class _VaccineScreenState extends State<VaccineScreen> {
         padding: EdgeInsets.all(8),
         height: MediaQuery.of(context).size.height * 0.2,
         child: Image.asset(
-          'assets/nurse.png',
+          'assets/images/nurse.png',
         ));
   }
 
