@@ -1,6 +1,37 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class StatusGrid extends StatelessWidget {
+import 'package:allsafe/models/case.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+
+class StatusGrid extends StatefulWidget {
+  @override
+  _StatusGridState createState() => _StatusGridState();
+}
+
+class _StatusGridState extends State<StatusGrid> {
+  final String URL = 'https://api.covid19india.org/data.json';
+
+  Map statewiseData;
+  Future<Map> dataNeed;
+
+  Future<Map> loadCases() async {
+    final response = 
+    await http.get(Uri.parse(URL));
+    final caseJson =response.body;
+    final decodedData = jsonDecode(caseJson);
+    statewiseData = decodedData['statewise'][16];
+    return statewiseData;
+    // CasesModel.statewise = List.from(statewiseData).map<Case>((caseList) => Case.fromMap(caseList)).toList();
+  }
+
+  @override
+  void initState() {
+    dataNeed = loadCases();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,20 +44,89 @@ class StatusGrid extends StatelessWidget {
               //displaying 1st column widget in horizontal ways
               child: Row(
             children: <Widget>[
-              _buildStatCard('Confirmed', '200,00', Color(0xFFFF9F9F),
-                  Color(0xFFE94545), Color(0xFFF10000)),
-              _buildStatCard('Active', '200,00', Color(0xFF99C2FF),
-                  Color(0xFF4B6BDA), Color(0xFF0B3CEA)),
+              FutureBuilder(
+                  future: dataNeed,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return _buildStatCard(
+                          'Confirmed',
+                          snapshot.data["confirmed"],
+                          Color(0xFFFF9F9F),
+                          Color(0xFFE94545),
+                          Color(0xFFF10000));
+                    } else {
+                      return _buildStatCard(
+                          'Confirmed',
+                          'Waiting',
+                          Color(0xFFFF9F9F),
+                          Color(0xFFE94545),
+                          Color(0xFFF10000));
+                    }
+                  }),
+              FutureBuilder(
+                  future: dataNeed,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      print(snapshot.data);
+                      return _buildStatCard(
+                          'Active',
+                          snapshot.data["active"],
+                          Color(0xFF99C2FF),
+                          Color(0xFF4B6BDA),
+                          Color(0xFF0B3CEA));
+                    } else {
+                      return _buildStatCard(
+                          'Active',
+                          'Waiting',
+                          Color(0xFF99C2FF),
+                          Color(0xFF4B6BDA),
+                          Color(0xFF0B3CEA));
+                    }
+                  }),
             ],
           )),
           Flexible(
               //displaying 1st column widget in horizontal ways
               child: Row(
             children: <Widget>[
-              _buildStatCard('Recovered', '200,00', Color(0xFF00B17C),
-                  Color(0xFF00552C), Color(0xFF00611B)),
-              _buildStatCard('Deceased', '200,00', Color(0xFFC5C5C5),
-                  Color(0xFF363636), Color(0xFF444444)),
+              FutureBuilder(
+                  future: dataNeed,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return _buildStatCard(
+                          'Recovered',
+                          snapshot.data["recovered"],
+                          Color(0xFF00B17C),
+                          Color(0xFF00552C),
+                          Color(0xFF00611B));
+                    } else {
+                      return _buildStatCard(
+                          'Recovered',
+                          'Waiting',
+                          Color(0xFF00B17C),
+                          Color(0xFF00552C),
+                          Color(0xFF00611B));
+                    }
+                  }),
+              FutureBuilder(
+                  future: dataNeed,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return _buildStatCard(
+                          'Deceased',
+                          snapshot.data["deaths"],
+                          Color(0xFFC5C5C5),
+                          Color(0xFF363636),
+                          Color(0xFF444444));
+                    } else {
+                      return _buildStatCard(
+                          'Deceased',
+                          'Waiting',
+                          Color(0xFFC5C5C5),
+                          Color(0xFF363636),
+                          Color(0xFF444444));
+                    }
+                  }),
             ],
           )),
         ],
