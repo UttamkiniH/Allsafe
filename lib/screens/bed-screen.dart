@@ -1,9 +1,11 @@
-import 'package:allsafe/constants.dart';
-import 'package:allsafe/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:allsafe/models/hospital-details.dart';
-import 'package:flutter/services.dart';
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:allsafe/constants.dart';
+import 'package:allsafe/models/hospital-details.dart';
+import 'package:allsafe/widgets/widgets.dart';
 
 class BedScreen extends StatefulWidget {
   @override
@@ -11,30 +13,26 @@ class BedScreen extends StatefulWidget {
 }
 
 class _BedScreenState extends State<BedScreen> {
+  List<Hospital> hospitaldata = [];
+
   @override
   void initState() {
     super.initState();
-    loadData();
   }
 
-  loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+  Future<List<Hospital>> loadData() async {
     var hospitalJson =
         await rootBundle.loadString("assets/data/bedCondition.json");
     var decodedJson = jsonDecode(hospitalJson);
-    HospitalModel.hospitals = List.from(decodedJson)
+
+   return List.from(decodedJson)
         .map<Hospital>((hospital) => Hospital.fromMap(hospital))
         .toList();
-        if (this.mounted) {
-  setState(() {
-    
-  });
-}
+    // print(HospitalModel.hospitals);
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         appBar: AppBar(
           primary: true,
@@ -47,13 +45,27 @@ class _BedScreenState extends State<BedScreen> {
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    showSearch(context: context, delegate: DataSearch());
+              child: FutureBuilder<List<Hospital>>(
+                  future: loadData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+                    if (snapshot.hasData &&
+                        snapshot.connectionState == ConnectionState.done) {
+                      return IconButton(
+                          icon: Icon(
+                            Icons.search,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            // print('bed screen ${snapshot.data}');
+                            showSearch(
+                                context: context,
+                                delegate: DataSearch(snapshot.data));
+                          });
+                    }
+                    return Container();
                   }),
             )
           ],
@@ -62,18 +74,41 @@ class _BedScreenState extends State<BedScreen> {
           children: [
             _buildHeader(),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: (HospitalModel.hospitals!=null && HospitalModel.hospitals.isNotEmpty)? ListView.builder(
-                  itemCount: HospitalModel.hospitals.length,
-                  itemBuilder: (context, index) {
-                    return HospitalWidget(
-                      hospital: HospitalModel.hospitals[index],
-                    );
-                  },
-                ): Center(
-                  child: CircularProgressIndicator(),
-                ),
+              child: FutureBuilder<List<Hospital>>(
+                future: loadData(),
+                builder: (context, snapshot) {
+                   if(snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+                    if (snapshot.hasData &&
+                        snapshot.connectionState == ConnectionState.done) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: (snapshot.data!= null &&
+                            snapshot.data.isNotEmpty)
+                        ? Scrollbar(
+                            thickness: 8.0,
+                            radius: Radius.circular(20),
+                            child: ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return HospitalWidget(
+                                  hospital: snapshot.data[index],
+                                );
+                              },
+                            ),
+                          )
+                          
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          
+                  );
+                  
+                
+                }
+                return Container();
+                }
               ),
             ),
           ],

@@ -4,7 +4,6 @@ import 'package:allsafe/constants.dart';
 import 'package:allsafe/models/hospital-details.dart';
 import 'package:allsafe/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class HospitalCard extends StatefulWidget {
   @override
@@ -12,14 +11,14 @@ class HospitalCard extends StatefulWidget {
 }
 
 class _HospitalCardState extends State<HospitalCard> {
-  final String URL = 'https://api.covid19india.org/data.json';
+  final String url = 'https://api.covid19india.org/data.json';
 
   Map statewiseData;
   Future<Map> dataNeed;
 
   Future<Map> loadCases() async {
     final response = 
-    await http.get(Uri.parse(URL));
+    await http.get(Uri.parse(url));
     final caseJson =response.body;
     final decodedData = jsonDecode(caseJson);
     statewiseData = decodedData['statewise'][16];

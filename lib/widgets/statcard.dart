@@ -20,16 +20,6 @@ class BuildStatCard extends StatelessWidget {
                   Color(0xFF4B6BDA), Color(0xFF0B3CEA)),
             ],
           ));
-          Flexible(
-              //displaying 1st column widget in horizontal ways
-              child: Row(
-            children: <Widget>[
-              _buildStatCard('Recovered', '200,00', Color(0xFF00B17C),
-                  Color(0xFF00552C), Color(0xFF00611B)),
-              _buildStatCard('Deceased', '200,00', Color(0xFFC5C5C5),
-                  Color(0xFF363636), Color(0xFF444444)),
-            ],
-          ));
       
     
   }

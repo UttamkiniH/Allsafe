@@ -1,5 +1,6 @@
 import 'package:allsafe/constants.dart';
 import 'package:allsafe/models/hospital-details.dart';
+import 'package:allsafe/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -15,11 +16,21 @@ class HospitalWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(2),
       child: Card(
+        
         shape: RoundedRectangleBorder(
           side: BorderSide(color: primaryColor, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => Information(hospital.hospital_name,HospitalModel.hospitals),
+                ),
+              );
+
+          },
           leading: Icon(
             MdiIcons.hospitalBoxOutline,
             color: accentColor,

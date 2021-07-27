@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 class Slots extends StatefulWidget {
   final List slots;
   const Slots({Key key, @required this.slots})
-      : assert(slots != null),
+      : 
         super(key: key);
 
   @override

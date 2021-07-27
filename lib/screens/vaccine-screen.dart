@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:allsafe/screens/screens.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:allsafe/constants.dart';
 import 'package:allsafe/widgets/widgets.dart';
@@ -34,7 +35,18 @@ class _VaccineScreenState extends State<VaccineScreen> {
       setState(() {
         slots = result['sessions'];
       });
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>Slots(slots: slots)));
+      (slots!=null&&slots.isNotEmpty)?
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Slots(slots: slots))):
+          Fluttertoast.showToast(
+        msg: "Slots are Empty",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 20.0
+    );
     });
   }
 
@@ -51,7 +63,6 @@ class _VaccineScreenState extends State<VaccineScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -172,7 +183,7 @@ class _VaccineScreenState extends State<VaccineScreen> {
                 color: accentColor,
               ),
               onPressed: () {
-                fetchSlots();
+                return fetchSlots();
               })),
     );
   }

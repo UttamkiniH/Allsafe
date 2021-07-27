@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class HospitalModel {
   static List<Hospital> hospitals;
+
 }
 
 class Hospital {

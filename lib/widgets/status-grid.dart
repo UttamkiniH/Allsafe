@@ -1,8 +1,5 @@
 import 'dart:convert';
-
-import 'package:allsafe/models/case.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class StatusGrid extends StatefulWidget {
@@ -11,14 +8,14 @@ class StatusGrid extends StatefulWidget {
 }
 
 class _StatusGridState extends State<StatusGrid> {
-  final String URL = 'https://api.covid19india.org/data.json';
+  final String uri = 'https://api.covid19india.org/data.json';
 
   Map statewiseData;
   Future<Map> dataNeed;
 
   Future<Map> loadCases() async {
     final response = 
-    await http.get(Uri.parse(URL));
+    await http.get(Uri.parse(uri));
     final caseJson =response.body;
     final decodedData = jsonDecode(caseJson);
     statewiseData = decodedData['statewise'][16];
