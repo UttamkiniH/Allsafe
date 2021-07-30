@@ -26,7 +26,10 @@ class HospitalWidget extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Information(hospital.hospital_name,HospitalModel.hospitals),
+                  builder: (BuildContext context) 
+                  {
+                    return Information(hospital.hospital_name,HospitalModel.hospitals);
+                    }
                 ),
               );
 

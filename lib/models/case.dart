@@ -8,7 +8,6 @@ class CasesModel {
         deaths: "36323",
         lastupdatedtime: "23/07/2021 20:22:39",
         recovered: "2831226")
-
   ];
 }
 
@@ -19,29 +18,26 @@ class Case {
   final String lastupdatedtime;
   final String recovered;
 
-  Case({
-    this.active,
-    this.confirmed,
-    this.deaths,
-    this.lastupdatedtime,
-    this.recovered
-  });
-
-  
+  Case(
+      {this.active,
+      this.confirmed,
+      this.deaths,
+      this.lastupdatedtime,
+      this.recovered});
 
   Case copyWith({
-    String  active,
+    String active,
     String confirmed,
     String deaths,
     String lastupdatedtime,
     String recovered,
   }) {
     return Case(
-     active : active ?? this.active,
-     confirmed :confirmed ?? this.confirmed,
-    deaths : deaths ?? this.deaths,
-     lastupdatedtime : lastupdatedtime ?? this.lastupdatedtime,
-     recovered : recovered ?? this.recovered,
+      active: active ?? this.active,
+      confirmed: confirmed ?? this.confirmed,
+      deaths: deaths ?? this.deaths,
+      lastupdatedtime: lastupdatedtime ?? this.lastupdatedtime,
+      recovered: recovered ?? this.recovered,
     );
   }
 
@@ -57,11 +53,11 @@ class Case {
 
   factory Case.fromMap(Map<String, dynamic> map) {
     return Case(
-     active: map['active'],
-     confirmed: map['confirmed'],
+      active: map['active'],
+      confirmed: map['confirmed'],
       deaths: map['deaths'],
       lastupdatedtime: map['lastupdatedtime'],
-      recovered:map['recovered'],
+      recovered: map['recovered'],
     );
   }
 
@@ -77,21 +73,21 @@ class Case {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Case &&
-      other.active == active &&
-      other.confirmed == confirmed &&
-      other.deaths == deaths &&
-      other.lastupdatedtime == lastupdatedtime &&
-      other.recovered == recovered;
+        other.active == active &&
+        other.confirmed == confirmed &&
+        other.deaths == deaths &&
+        other.lastupdatedtime == lastupdatedtime &&
+        other.recovered == recovered;
   }
 
   @override
   int get hashCode {
     return active.hashCode ^
-      confirmed.hashCode ^
-      deaths.hashCode ^
-      lastupdatedtime.hashCode ^
-      recovered.hashCode;
+        confirmed.hashCode ^
+        deaths.hashCode ^
+        lastupdatedtime.hashCode ^
+        recovered.hashCode;
   }
 }

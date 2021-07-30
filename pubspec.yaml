@@ -27,6 +27,7 @@ dependencies:
   material_design_icons_flutter: 4.0.5955  
   # add this line to your dependencies
   fluttertoast: ^7.1.8
+  animated_splash_screen: ^1.0.1+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

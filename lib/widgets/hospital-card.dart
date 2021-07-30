@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:allsafe/constants.dart';
 import 'package:allsafe/models/hospital-details.dart';
 import 'package:allsafe/widgets/widgets.dart';
@@ -17,9 +17,8 @@ class _HospitalCardState extends State<HospitalCard> {
   Future<Map> dataNeed;
 
   Future<Map> loadCases() async {
-    final response = 
-    await http.get(Uri.parse(url));
-    final caseJson =response.body;
+    final response = await http.get(Uri.parse(url));
+    final caseJson = response.body;
     final decodedData = jsonDecode(caseJson);
     statewiseData = decodedData['statewise'][16];
     return statewiseData;
@@ -65,7 +64,7 @@ class _HospitalCardState extends State<HospitalCard> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Text(
-                    snapshot.data["lastupdatedtime"],
+                    'Cases Update :-${snapshot.data["lastupdatedtime"]}',
                     style: TextStyle(
                         fontSize: 15,
                         fontFamily: 'Public Sans',
@@ -111,8 +110,3 @@ class _HospitalCardState extends State<HospitalCard> {
           ));
   }
 }
-
-// Text(
-//                 '28th May 11:30pm',
-//                 style: TextStyle(fontSize: 15,fontFamily: 'Public Sans',color: primaryColor),
-//               )),

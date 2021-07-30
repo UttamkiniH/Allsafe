@@ -17,6 +17,5 @@ ThemeData appTheme() {
   return base.copyWith(
     textTheme: _appTextTheme(base.textTheme),
     primaryColor: Color.fromRGBO(56, 57, 128, 1),
-    // accentColor:
   );
 }

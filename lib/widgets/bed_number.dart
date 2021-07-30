@@ -1,22 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:allsafe/constants.dart';
 
 class BuildBed extends StatefulWidget {
-  String firstNumber,normal,secondNumber,oxygen;
-  BuildBed( this.firstNumber, this.normal, this.secondNumber,this.oxygen);
-
-  
+  String firstNumber, normal, secondNumber, oxygen;
+  BuildBed(this.firstNumber, this.normal, this.secondNumber, this.oxygen);
 
   @override
-  _BuildBedState createState() => _BuildBedState(this.firstNumber, this.normal, this.secondNumber,this.oxygen);
+  _BuildBedState createState() => _BuildBedState(
+      this.firstNumber, this.normal, this.secondNumber, this.oxygen);
 }
 
 class _BuildBedState extends State<BuildBed> {
-  String firstNumber,normal,secondNumber,oxygen;
-  _BuildBedState(this.firstNumber, this.normal, this.secondNumber,this.oxygen);
-
+  String firstNumber, normal, secondNumber, oxygen;
+  _BuildBedState(this.firstNumber, this.normal, this.secondNumber, this.oxygen);
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class Slots extends StatefulWidget {
   final List slots;
-  const Slots({Key key, @required this.slots})
-      : 
-        super(key: key);
+  const Slots({Key key, @required this.slots}) : super(key: key);
 
   @override
   _SlotsState createState() => _SlotsState();
@@ -38,7 +36,6 @@ class _SlotsState extends State<Slots> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Container(
-                  // color: Colors.yellow,
                   height: MediaQuery.of(context).size.height * 0.4,
                   padding: EdgeInsets.all(10),
                   child: Column(

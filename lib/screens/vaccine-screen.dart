@@ -31,22 +31,19 @@ class _VaccineScreenState extends State<VaccineScreen> {
                 '-2021'))
         .then((value) {
       Map result = jsonDecode(value.body);
-      print(result);
       setState(() {
         slots = result['sessions'];
       });
-      (slots!=null&&slots.isNotEmpty)?
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Slots(slots: slots))):
-          Fluttertoast.showToast(
-        msg: "Slots are Empty",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 20.0
-    );
+      (slots != null && slots.isNotEmpty)
+          ? Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Slots(slots: slots)))
+          : Fluttertoast.showToast(
+              msg: "Slots are Empty",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              textColor: Colors.black,
+              fontSize: 15.0);
     });
   }
 
@@ -62,96 +59,95 @@ class _VaccineScreenState extends State<VaccineScreen> {
           style: headlineMain,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: <Widget>[
-              Container(
-                  margin: EdgeInsets.all(8),
-                  child: Text(
-                    'Hi There!',
-                    style: hiStyle,
-                  )),
-              Center(
-                child: imageClip(),
-              ),
-              PinCode(pinCodeController: pinCodeController),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                // color: Colors.yellow,
-                // padding: const EdgeInsets.all(25.0),
-                //row for two widgets -> 1. date, 2. dropdown
-                child: Row(
-                  children: [
-                    //1.date widget
-                    BuildDate(dateCodeController),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    //2.dropdown widget
-                    Expanded(
-                      child: Container(
-                        height: 58,
-                        margin: EdgeInsets.only(bottom: 25),
-                        padding: const EdgeInsets.only(left: 25.0, right: 10.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(width: 2, color: accentColor),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            value: dropdownValue,
-                            icon: const Icon(MdiIcons.chevronDown),
-                            iconSize: 30,
-                            iconEnabledColor: accentColor,
-                            elevation: 16,
-                            style: const TextStyle(
-                                fontSize: 15,
-                                color: Colors.black,
-                                fontFamily: 'Public Sans Normal',
-                                fontWeight: FontWeight.w600),
-                            underline: Container(
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                dropdownValue = newValue;
-                              });
-                            },
-                            items: <String>[
-                              '01',
-                              '02',
-                              '03',
-                              '04',
-                              '05',
-                              '06',
-                              '07',
-                              '08',
-                              '09',
-                              '10',
-                              '11',
-                              '12'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              _buildSubmitButton(),
-            ],
+      body: ListView(
+        padding: EdgeInsets.all(10),
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        children: [
+          Container(
+            alignment: Alignment.center,
+              margin: EdgeInsets.all(8),
+              child: Text(
+                'Hi There!',
+                style: hiStyle,
+              )),
+          Center(
+            child: imageClip(),
           ),
-        ),
+          PinCode(pinCodeController: pinCodeController),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            // color: Colors.yellow,
+            // padding: const EdgeInsets.all(25.0),
+            //row for two widgets -> 1. date, 2. dropdown
+            child: Row(
+              children: [
+                //1.date widget
+                BuildDate(dateCodeController),
+                SizedBox(
+                  width: 10,
+                ),
+                //2.dropdown widget
+                Flexible(
+                  child: Container(
+                    height: 58,
+                    margin: EdgeInsets.only(bottom: 25),
+                    padding:
+                        const EdgeInsets.only(left: 25.0, right: 10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(width: 2, color: accentColor),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: dropdownValue,
+                        icon: const Icon(MdiIcons.chevronDown),
+                        iconSize: 30,
+                        iconEnabledColor: accentColor,
+                        elevation: 16,
+                        style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontFamily: 'Public Sans Normal',
+                            fontWeight: FontWeight.w600),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.black,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: <String>[
+                          '01',
+                          '02',
+                          '03',
+                          '04',
+                          '05',
+                          '06',
+                          '07',
+                          '08',
+                          '09',
+                          '10',
+                          '11',
+                          '12'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          _buildSubmitButton()
+        ],
       ),
     ));
   }
@@ -169,22 +165,27 @@ class _VaccineScreenState extends State<VaccineScreen> {
         ));
   }
 
-  Flexible _buildSubmitButton() {
-    return Flexible(
-      child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(width: 2, color: primaryColor),
-          ),
-          child: IconButton(
-              icon: Icon(
-                Icons.done,
-                size: 30,
-                color: accentColor,
-              ),
-              onPressed: () {
-                return fetchSlots();
-              })),
+  Widget _buildSubmitButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 50,
+          width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(width: 2, color: primaryColor),
+            ),
+            child: IconButton(
+                icon: Icon(
+                  Icons.done,
+                  size: 30,
+                  color: accentColor,
+                ),
+                onPressed: () {
+                  return fetchSlots();
+                })),
+      ],
     );
   }
 }

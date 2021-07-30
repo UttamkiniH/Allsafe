@@ -64,7 +64,7 @@ class _StatusGridState extends State<StatusGrid> {
                   future: dataNeed,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      print(snapshot.data);
+
                       return _buildStatCard(
                           'Active',
                           snapshot.data["active"],

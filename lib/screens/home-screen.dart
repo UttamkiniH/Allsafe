@@ -1,4 +1,4 @@
-import 'dart:convert'; 
+import 'dart:convert';
 import 'package:allsafe/constants.dart';
 import 'package:allsafe/models/hospital-details.dart';
 import 'package:allsafe/widgets/widgets.dart';
@@ -25,22 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
     HospitalModel.hospitals = List.from(decodedJson)
         .map<Hospital>((hospital) => Hospital.fromMap(hospital))
         .toList();
-        if (this.mounted) {
-  setState(() {
-    
-  });
-}
+    if (this.mounted) {
+      setState(() {});
+    }
   }
-  
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: primaryColor,
         appBar: CustomAppbar(),
         body: CustomScrollView(
-
           physics: NeverScrollableScrollPhysics(),
           slivers: <Widget>[
             _buildHeader(),
@@ -49,17 +44,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 sliver: SliverToBoxAdapter(
                   child: StatusGrid(),
                 )),
-                SliverPadding(
+            SliverPadding(
                 padding: const EdgeInsets.only(top: 20.0),
                 sliver: SliverToBoxAdapter(
                   child: HospitalCard(),
                 )),
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    color: Colors.white,
-                  ),
-                ),
+            SliverToBoxAdapter(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                color: Colors.white,
+              ),
+            ),
           ],
         ));
   }

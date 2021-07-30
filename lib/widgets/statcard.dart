@@ -1,30 +1,24 @@
 import 'package:flutter/material.dart';
 
-
 class BuildStatCard extends StatelessWidget {
-  
   final Map statewiseData;
-   
 
   const BuildStatCard({Key key, this.statewiseData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-   print(statewiseData['confirmed']);
     return Flexible(
-                  //displaying 1st column widget in horizontal ways
-                  child: Row(
-                children: <Widget>[
-              _buildStatCard('Confirmed', statewiseData['confirmed'].toString(), Color(0xFFFF9F9F),
-                  Color(0xFFE94545), Color(0xFFF10000)),
-              _buildStatCard('Active',  statewiseData['confirmed'].toString(), Color(0xFF99C2FF),
-                  Color(0xFF4B6BDA), Color(0xFF0B3CEA)),
-            ],
-          ));
-      
-    
+        //displaying 1st column widget in horizontal ways
+        child: Row(
+      children: <Widget>[
+        _buildStatCard('Confirmed', statewiseData['confirmed'].toString(),
+            Color(0xFFFF9F9F), Color(0xFFE94545), Color(0xFFF10000)),
+        _buildStatCard('Active', statewiseData['confirmed'].toString(),
+            Color(0xFF99C2FF), Color(0xFF4B6BDA), Color(0xFF0B3CEA)),
+      ],
+    ));
   }
 
-   Expanded _buildStatCard(String title, String count, Color color,
+  Expanded _buildStatCard(String title, String count, Color color,
       Color titleColor, Color countColor) {
     return Expanded(
       child: Container(
@@ -49,8 +43,7 @@ class BuildStatCard extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.bottomRight,
-              child: Text(
-                count,
+              child: Text(count,
                   style: TextStyle(
                       fontFamily: 'Public Sans',
                       fontSize: 18,
@@ -62,5 +55,4 @@ class BuildStatCard extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class DataSearch extends SearchDelegate<String> {
-   List<Hospital> hospitals;
+  List<Hospital> hospitals;
 
   final recentHospitals = [
-    'BGS Global Hospitals',
-    'Sparsh super speciality Hospital Blood Bank',
-    'Sri. Shankara Cancer Hospital and Research Centre',
-    'Rajarajeshwari Medical College Hospital',
-    'Health Care Global Enterprises LTD',
+    'Akash Hospital',
+    'Sir C V Raman General Hopsital Indiranagar',
+    'East Point Hospital',
+    'MVJ Medical College And Research Hospital',
+    'Dr B R Ambedkar Medical College',
+    'EMPLOYEES STATE INSURANCE CORPORATION Peenya',
+    'Supriya Hospital'
   ];
 
-  DataSearch(List<Hospital> hospitals){
+  DataSearch(List<Hospital> hospitals) {
     this.hospitals = hospitals;
-    // print('data search $hospitals');
   }
-
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -55,9 +55,7 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container(
-      child:null
-    );
+    return Container(child: null);
   }
 
   @override
@@ -71,10 +69,9 @@ class DataSearch extends SearchDelegate<String> {
             return hospitalLower.startsWith(queryLower);
           }).map((Hospital hospital) {
             return hospital.hospital_name;
-           }).toList();
-          
+          }).toList();
+
     return buildSuggestionsSuccess(suggestions);
-    
   }
 
   Widget buildSuggestionsSuccess(List<String> suggestions) => ListView.builder(
@@ -89,10 +86,11 @@ class DataSearch extends SearchDelegate<String> {
               query = suggestion;
               showResults(context);
               // 3. Navigate to Result Page
-               Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Information(suggestion,hospitals),
+                  builder: (BuildContext context) =>
+                      Information(suggestion, hospitals),
                 ),
               );
             },

@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:allsafe/constants.dart';
 import 'package:allsafe/models/hospital-details.dart';
 import 'package:allsafe/widgets/widgets.dart';
+
 
 class BedScreen extends StatefulWidget {
   @override
@@ -25,7 +24,7 @@ class _BedScreenState extends State<BedScreen> {
         await rootBundle.loadString("assets/data/bedCondition.json");
     var decodedJson = jsonDecode(hospitalJson);
 
-   return List.from(decodedJson)
+    return List.from(decodedJson)
         .map<Hospital>((hospital) => Hospital.fromMap(hospital))
         .toList();
     // print(HospitalModel.hospitals);
@@ -75,41 +74,33 @@ class _BedScreenState extends State<BedScreen> {
             _buildHeader(),
             Expanded(
               child: FutureBuilder<List<Hospital>>(
-                future: loadData(),
-                builder: (context, snapshot) {
-                   if(snapshot.connectionState == ConnectionState.waiting) {
+                  future: loadData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator();
                     }
                     if (snapshot.hasData &&
                         snapshot.connectionState == ConnectionState.done) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: (snapshot.data!= null &&
-                            snapshot.data.isNotEmpty)
-                        ? Scrollbar(
-                            thickness: 8.0,
-                            radius: Radius.circular(20),
-                            child: ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                return HospitalWidget(
-                                  hospital: snapshot.data[index],
-                                );
-                              },
-                            ),
-                          )
-                          
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          
-                  );
-                  
-                
-                }
-                return Container();
-                }
-              ),
+                      return (snapshot.data != null && snapshot.data.isNotEmpty)
+                          ? Scrollbar(
+                              thickness: 10.0,
+                              radius: Radius.circular(5),
+                              child: ListView.builder(
+                                padding: EdgeInsets.all(10),
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) {
+                                  return HospitalWidget(
+                                    hospital: snapshot.data[index],
+                                  );
+                                },
+                              ),
+                            )
+                          : Center(
+                              child: CircularProgressIndicator(),
+                            );
+                    }
+                    return Container();
+                  }),
             ),
           ],
         ));
@@ -117,6 +108,24 @@ class _BedScreenState extends State<BedScreen> {
 
   Container _buildHeader() {
     return Container(
+      alignment: Alignment.bottomRight,
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Icon(
+            Icons.history,
+            color: Colors.white,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            'Sun 13 Jun 2021',
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
+      ),
       padding: EdgeInsets.all(30),
       decoration: BoxDecoration(
           color: primaryColor,
