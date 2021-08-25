@@ -1,6 +1,6 @@
 # Allsafe
 
-<!-- <img src="prototype/0.png" height=500> &nbsp; -->
+<img src="prototype/FeatureGraphic.png"> &nbsp;
 
 ### "AllSafe is all in one covid-19 Safety application at a go!”
 You can </br>
@@ -49,8 +49,4 @@ Vaccination Slots - https://www.cowin.gov.in/ </br>
 <img src="prototype/1.png" height=500> &nbsp; <img src="prototype/2.png" height=500> &nbsp; <img src="prototype/3.png" height=500> &nbsp; <img src="prototype/4.png" height=500> &nbsp;
 <img src="prototype/5.png" height=500> &nbsp; <img src="prototype/6.png" height=500> &nbsp;
 
-
-
-### For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### बहुत - बहुत धन्यवाद 🙏
