@@ -11,7 +11,7 @@ class HospitalCard extends StatefulWidget {
 }
 
 class _HospitalCardState extends State<HospitalCard> {
-  final String url = 'https://api.covid19india.org/data.json';
+  final String url = 'https://data.covid19india.org/v4/min/data.min.json';
 
   Map statewiseData;
   Future<Map> dataNeed;
@@ -20,7 +20,7 @@ class _HospitalCardState extends State<HospitalCard> {
     final response = await http.get(Uri.parse(url));
     final caseJson = response.body;
     final decodedData = jsonDecode(caseJson);
-    statewiseData = decodedData['statewise'][16];
+    statewiseData = decodedData['KA']['meta'];
     return statewiseData;
   }
 
@@ -28,6 +28,7 @@ class _HospitalCardState extends State<HospitalCard> {
   void initState() {
     dataNeed = loadCases();
     super.initState();
+
   }
 
   @override
@@ -64,7 +65,7 @@ class _HospitalCardState extends State<HospitalCard> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Text(
-                    'Cases Update :-${snapshot.data["lastupdatedtime"]}',
+                    'Cases Update :${snapshot.data["last_updated"]}',
                     style: TextStyle(
                         fontSize: 15,
                         fontFamily: 'Public Sans',

@@ -8,7 +8,7 @@ class StatusGrid extends StatefulWidget {
 }
 
 class _StatusGridState extends State<StatusGrid> {
-  final String uri = 'https://api.covid19india.org/data.json';
+  final String uri = 'https://data.covid19india.org/v4/min/data.min.json';
 
   Map statewiseData;
   Future<Map> dataNeed;
@@ -18,7 +18,7 @@ class _StatusGridState extends State<StatusGrid> {
     await http.get(Uri.parse(uri));
     final caseJson =response.body;
     final decodedData = jsonDecode(caseJson);
-    statewiseData = decodedData['statewise'][16];
+    statewiseData = decodedData['KA']['total'];
     return statewiseData;
     // CasesModel.statewise = List.from(statewiseData).map<Case>((caseList) => Case.fromMap(caseList)).toList();
   }
@@ -47,7 +47,7 @@ class _StatusGridState extends State<StatusGrid> {
                     if (snapshot.hasData) {
                       return _buildStatCard(
                           'Confirmed',
-                          snapshot.data["confirmed"],
+                          snapshot.data['confirmed'].toString(),
                           Color(0xFFFF9F9F),
                           Color(0xFFE94545),
                           Color(0xFFF10000));
@@ -67,7 +67,7 @@ class _StatusGridState extends State<StatusGrid> {
 
                       return _buildStatCard(
                           'Active',
-                          snapshot.data["active"],
+                          snapshot.data['tested'].toString(),
                           Color(0xFF99C2FF),
                           Color(0xFF4B6BDA),
                           Color(0xFF0B3CEA));
@@ -92,7 +92,7 @@ class _StatusGridState extends State<StatusGrid> {
                     if (snapshot.hasData) {
                       return _buildStatCard(
                           'Recovered',
-                          snapshot.data["recovered"],
+                          snapshot.data['recovered'].toString(),
                           Color(0xFF00B17C),
                           Color(0xFF00552C),
                           Color(0xFF00611B));
@@ -111,7 +111,7 @@ class _StatusGridState extends State<StatusGrid> {
                     if (snapshot.hasData) {
                       return _buildStatCard(
                           'Deceased',
-                          snapshot.data["deaths"],
+                          snapshot.data["deceased"].toString(),
                           Color(0xFFC5C5C5),
                           Color(0xFF363636),
                           Color(0xFF444444));
@@ -156,7 +156,7 @@ class _StatusGridState extends State<StatusGrid> {
             ),
             Container(
               alignment: Alignment.bottomRight,
-              child: Text(count,
+              child: Text('$count',
                   style: TextStyle(
                       fontFamily: 'Public Sans',
                       fontSize: 18,

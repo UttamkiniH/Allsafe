@@ -80,8 +80,7 @@ class DataSearch extends SearchDelegate<String> {
           final suggestion = suggestions[index];
           final queryText = suggestion.substring(0, query.length);
           final remainingText = suggestion.substring(query.length);
-
-          return ListTile(
+            return ListTile(
             onTap: () {
               query = suggestion;
               showResults(context);
