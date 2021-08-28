@@ -2,6 +2,12 @@
 
 <img src="prototype/FeatureGraphic.png"> &nbsp;
 
+## User Interface 🍇
+
+<img src="prototype/1.png" height=500> &nbsp; <img src="prototype/2.png" height=500> &nbsp; <img src="prototype/3.png" height=500> &nbsp; <img src="prototype/4.png" height=500> &nbsp;
+<img src="prototype/5.png" height=500> &nbsp; <img src="prototype/6.png" height=500> &nbsp;
+
+
 ### "AllSafe is all in one covid-19 Safety application at a go!”
 You can </br>
 ✔ track covid-19 Karnataka cases </br>
@@ -44,9 +50,5 @@ Vaccination Slots - https://www.cowin.gov.in/ </br>
 
 
 
-## User Interface 🍇
-
-<img src="prototype/1.png" height=500> &nbsp; <img src="prototype/2.png" height=500> &nbsp; <img src="prototype/3.png" height=500> &nbsp; <img src="prototype/4.png" height=500> &nbsp;
-<img src="prototype/5.png" height=500> &nbsp; <img src="prototype/6.png" height=500> &nbsp;
 
 ### बहुत - बहुत धन्यवाद 🙏
